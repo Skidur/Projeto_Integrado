@@ -1,1 +1,299 @@
-/*(Responsável: Lucas Moraes)*/
+:root {
+    --cor-primaria: #4CAF50;
+    --cor-primaria-escura: #45a049;
+    --cor-fundo: #f4f7f6;
+    --cor-superficie: #FFFFFF;
+    --cor-texto-principal: #333333;
+    --cor-texto-secundario: #666666;
+    --cor-bordas: #e0e0e0;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-superficie);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--cor-primaria);
+    border: 1px solid var(--cor-primaria);
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.nav-button.primary {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.nav-button.primary:hover {
+    background-color: var(--cor-primaria-escura);
+}
+
+.home-page {
+    text-align: center;
+}
+
+.home-header {
+    background-color: #e8f5e9;
+    padding: 4rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+}
+
+.home-header h1 {
+    font-size: 3.5rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+.home-header p {
+    font-size: 1.25rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: var(--cor-primaria);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.cta-button:hover {
+    background-color: var(--cor-primaria-escura);
+    transform: translateY(-2px);
+}
+
+.features-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--cor-texto-principal);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: var(--cor-superficie);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.feature-card h3 {
+    color: var(--cor-primaria);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
+
+.auth-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem;
+    background-color: var(--cor-superficie);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.auth-form-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.form-button {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--cor-primaria);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-button:hover {
+    background-color: var(--cor-primaria-escura);
+}
+
+.auth-switch-text {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-switch-text a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-switch-text a:hover {
+    text-decoration: underline;
+}
+
+.calorie-summary {
+    background-color: var(--cor-superficie);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.meal-card {
+    background-color: var(--cor-superficie);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.meal-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-bordas);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.food-list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.food-item-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.food-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.details-button {
+    background: none;
+    border: 1px solid var(--cor-bordas);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.food-item-details {
+    background-color: #fafafa;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.empty-list-text {
+    color: var(--cor-texto-secundario);
+    font-style: italic;
+    text-align: center;
+    padding: 20px 0;
+}

@@ -1,20 +1,28 @@
-// (Responsável: Lucas Felipe)
 import React from 'react';
 
-/**
- * Componente que mostra o resumo do dia, incluindo o total de calorias.
- * @param {object} props - As propriedades do componente.
- * @param {number} props.totalCalories - O total de calorias a ser exibido.
- */
-const CalorieSummary = ({ totalCalories }) => {
+function CalorieSummary({ totalCalorias, totalProteinas, totalCarboidratos, totalGorduras }) {
   return (
-    <div className="bg-indigo-50 p-6 rounded-2xl shadow-lg text-center">
-      <h3 className="text-2xl font-bold text-indigo-800 mb-2">Resumo do Dia</h3>
-      <p className="text-4xl font-extrabold text-indigo-900">
-        {Math.round(totalCalories)} <span className="text-lg text-indigo-600 font-bold">kcal</span>
-      </p>
+    <div className="calorie-summary">
+      <div className="summary-total">
+        <h2>{Math.round(totalCalorias)}</h2>
+        <p>Calorias Totais</p>
+      </div>
+      <div className="summary-macros">
+        <div className="macro-item">
+          <span className="macro-value">{Math.round(totalProteinas)}g</span>
+          <span className="macro-label">Proteínas</span>
+        </div>
+        <div className="macro-item">
+          <span className="macro-value">{Math.round(totalCarboidratos)}g</span>
+          <span className="macro-label">Carboidratos</span>
+        </div>
+        <div className="macro-item">
+          <span className="macro-value">{Math.round(totalGorduras)}g</span>
+          <span className="macro-label">Gorduras</span>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default CalorieSummary;

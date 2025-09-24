@@ -5,7 +5,7 @@ function Navbar() {
     return (
         <nav className="navbar">
             <Link to="/" className="navbar-brand">
-                NutriTrack
+                Alimetria
             </Link>
             <div className="navbar-links">
                 <Link to="/login" className="nav-button">

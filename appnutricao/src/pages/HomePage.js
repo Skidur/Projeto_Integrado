@@ -5,7 +5,7 @@ function HomePage() {
     return (
         <div className="home-page">
             <header className="home-header">
-                <h1>Bem-vindo ao NutriTrack</h1>
+                <h1>Bem-vindo ao Alimetria</h1>
                 <p>Seu assistente pessoal para um acompanhamento nutricional simples e eficaz.</p>
                 <Link to="/register" className="cta-button">
                     Comece a Monitorar Agora

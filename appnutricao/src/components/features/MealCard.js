@@ -1,8 +1,8 @@
 import React from 'react';
 import FoodListItem from '../ui/FoodListItem';
-import Search from './Search';
+import { Link } from 'react-router-dom';
 
-function MealCard({ title, foods, onAddFood }) {
+function MealCard({ title, foods, mealType }) {
   const subtotalCalorias = foods.reduce((total, food) => total + food.calorias, 0);
 
   return (
@@ -20,7 +20,9 @@ function MealCard({ title, foods, onAddFood }) {
         )}
       </div>
 
-      <Search onAddFood={onAddFood} />
+      <Link to={`/adicionar/${mealType}`} className="add-food-button">
+        + Adicionar Alimento
+      </Link>
     </div>
   );
 }

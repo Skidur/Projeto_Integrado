@@ -1,13 +1,19 @@
+require('dotenv').config();
+
+console.log('[DEBUG] EDAMAM_APP_ID:', process.env.EDAMAM_APP_ID);
+console.log('[DEBUG] EDAMAM_APP_KEY:', process.env.EDAMAM_APP_KEY);
+
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
 const authRoutes = require('./routes/authRoutes');
+const foodsRoutes = require('./routes/foodsRoutes');
+
 
 const app = express();
 const PORT = 3001;
 
 app.use(cors()); 
-
 app.use(express.json()); 
 
 app.get('/api', (req, res) => {
@@ -15,6 +21,7 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/foods', foodsRoutes);
 
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);

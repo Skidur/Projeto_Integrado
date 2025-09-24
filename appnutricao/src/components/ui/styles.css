@@ -297,3 +297,287 @@ body {
     text-align: center;
     padding: 20px 0;
 }
+
+.dashboard-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+}
+
+.dashboard-header p {
+    color: var(--cor-texto-secundario);
+    font-size: 1.1rem;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.calorie-summary-card {
+    background: linear-gradient(135deg, var(--cor-primaria), #2E8B57);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.summary-main h2 {
+    font-size: 3rem;
+    margin: 0;
+}
+.summary-main span {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+.summary-macros {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+}
+.macro-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+.macro-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.add-food-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-bordas);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: var(--cor-fundo);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.search-results {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.food-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-bordas);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.food-details {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+
+.add-button {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-button:hover {
+    background-color: var(--cor-primaria-escura);
+}
+
+.loading-message, .error-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--cor-texto-secundario);
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+main {
+  padding: 20px 0; /* Remove padding lateral do main para alinhar com o container */
+}
+
+/* --- ESTILOS REFINADOS PARA O DASHBOARD --- */
+
+.dashboard-header {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--cor-bordas);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: var(--cor-texto-principal);
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: var(--cor-texto-secundario);
+}
+
+/* Card de Resumo de Calorias */
+.calorie-summary-card {
+  background: linear-gradient(135deg, var(--cor-primaria), #388E3C); /* Usando sua cor primária em um gradiente */
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.summary-main h2 {
+  font-size: 3.5rem;
+  margin: 0;
+  font-weight: 700;
+}
+.summary-main span {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.summary-macros {
+  display: flex;
+  gap: 25px;
+  text-align: center;
+}
+.macro-label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+.macro-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Card de Refeição */
+.meal-card .food-list-item span:first-child {
+    flex-grow: 1; /* Garante que o nome do item empurre as calorias para a direita */
+}
+
+.add-food-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background-color: var(--cor-fundo);
+    border: 2px dashed var(--cor-primaria);
+    color: var(--cor-primaria);
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.add-food-button:hover {
+    background-color: #e8f5e9; /* Um verde bem clarinho */
+    color: var(--cor-primaria-escura);
+    border-style: solid;
+}
+
+
+/* --- ESTILOS REFINADOS PARA ADD FOOD PAGE --- */
+
+.add-food-page .search-input {
+  box-shadow: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.add-food-page .search-input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.add-food-page .food-list-item {
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-bordas);
+    box-shadow: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-food-page .food-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.add-food-page .add-button {
+    background-color: var(--cor-primaria);
+}
+
+.add-food-page .add-button:hover {
+    background-color: var(--cor-primaria-escura);
+}
+
+.food-list-item {
+    gap: 15px; /* Adiciona um espaço entre os elementos */
+}
+
+.food-info {
+    flex-grow: 1; /* Faz a informação do nome ocupar o máximo de espaço possível */
+}
+
+.food-macros {
+    text-align: right;
+    white-space: nowrap; /* Impede que o texto quebre em duas linhas */
+}

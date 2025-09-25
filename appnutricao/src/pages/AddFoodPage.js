@@ -9,6 +9,7 @@ function AddFoodPage() {
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [horario, setHorario] = useState(new Date().toTimeString().slice(0, 5));
 
     useEffect(() => {
         if (searchTerm.trim() === '') {
@@ -42,10 +43,35 @@ function AddFoodPage() {
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
-    const handleAddFood = (food) => {
-        console.log('Adicionando:', food, 'na refeição:', mealType);
-        alert(`${food.nome} foi selecionado! Agora precisamos salvar.`);
-        navigate('/dashboard');
+    const handleAddFood = async (food) => {
+        const registro = {
+            usuario_id: 1,
+            alimento_id: food.id,
+            mealType: mealType,
+            data: new Date().toISOString().split('T')[0],
+            quantidade: 100,
+            horario: horario
+        };
+
+        try {
+            const response = await fetch('http://localhost:3001/api/diario/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(registro)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Falha ao adicionar alimento.');
+            }
+
+            console.log('Alimento adicionado com sucesso!');
+            navigate('/dashboard');
+
+        } catch (error) {
+            console.error('Erro ao salvar alimento:', error);
+            alert(`Erro: ${error.message}`);
+        }
     };
 
     const getTitle = (type) => {
@@ -76,12 +102,22 @@ function AddFoodPage() {
                 />
             </div>
 
+            <div className="form-group">
+                <label htmlFor="horario">Horário da Refeição:</label>
+                <input 
+                    type="time" 
+                    id="horario"
+                    className="time-input"
+                    value={horario}
+                    onChange={(e) => setHorario(e.target.value)}
+                />
+            </div>
+
             <div className="search-results">
                 {isLoading && <p className="loading-message">Buscando...</p>}
                 {error && <p className="error-message">{error}</p>}
                 
                 {!isLoading && !error && results.map(food => {
-                    // --- LÓGICA DE FORMATAÇÃO DO NOME ---
                     const nomeArray = food.nome.split(',');
                     const nomePrincipal = nomeArray[0];
                     const descricao = nomeArray.slice(1).join(',').trim();
@@ -90,7 +126,6 @@ function AddFoodPage() {
                         <div className="food-list-item" key={food.id || food.nome}>
                             <div className="food-info">
                                 <span className="food-name">{nomePrincipal}</span>
-                                {/* Só mostra a descrição se ela existir */}
                                 {descricao && <span className="food-details">{descricao}</span>} 
                             </div>
                             <div className="food-macros">

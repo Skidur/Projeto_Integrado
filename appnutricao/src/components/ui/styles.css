@@ -6,6 +6,9 @@
     --cor-texto-principal: #333333;
     --cor-texto-secundario: #666666;
     --cor-bordas: #e0e0e0;
+    --cor-erro: #dc3545;
+    --cor-erro-fundo: #f8d7da;
+    --gradiente-primario: linear-gradient(135deg, var(--cor-primaria), #2E8B57);
 }
 
 body {
@@ -17,153 +20,173 @@ body {
     color: var(--cor-texto-principal);
 }
 
-.app-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+main {
+    padding: 2rem;
+}
+
+.navbar-container {
+    background-color: var(--cor-superficie);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar {
-    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--cor-superficie);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-sizing: border-box;
 }
 
-.navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
+.navbar .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--cor-primaria);
     text-decoration: none;
 }
 
-.navbar-links {
+.nav-center {
+    list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-button {
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
+.nav-center a {
     text-decoration: none;
-    color: var(--cor-primaria);
-    border: 1px solid var(--cor-primaria);
-    font-weight: 600;
-    transition: all 0.2s ease-in-out;
-}
-
-.nav-button:hover {
-    background-color: var(--cor-primaria);
-    color: white;
-}
-
-.nav-button.primary {
-    background-color: var(--cor-primaria);
-    color: white;
-}
-
-.nav-button.primary:hover {
-    background-color: var(--cor-primaria-escura);
-}
-
-.home-page {
-    text-align: center;
-}
-
-.home-header {
-    background-color: #e8f5e9;
-    padding: 4rem 2rem;
-    border-radius: 12px;
-    margin-bottom: 3rem;
-}
-
-.home-header h1 {
-    font-size: 3.5rem;
-    color: #2e7d32;
-    margin-bottom: 1rem;
-}
-
-.home-header p {
-    font-size: 1.25rem;
     color: var(--cor-texto-secundario);
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding-bottom: 5px;
+    position: relative;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    color: #fff;
+.nav-center a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
     background-color: var(--cor-primaria);
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: all 0.3s ease-in-out;
 }
 
-.cta-button:hover {
-    background-color: var(--cor-primaria-escura);
-    transform: translateY(-2px);
+.nav-center a:hover::after,
+.nav-center a.active::after {
+    width: 100%;
+    left: 0;
 }
 
-.features-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+.nav-center a:hover,
+.nav-center a.active {
     color: var(--cor-texto-principal);
 }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+.nav-right .nav-actions,
+.nav-right .nav-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
-.feature-card {
-    background: var(--cor-superficie);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+.nav-right .btn-login {
+    padding: 10px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--cor-primaria);
+    color: white;
+    transition: background-color 0.2s;
+}
+.nav-right .btn-login:hover {
+    background-color: var(--cor-primaria-escura);
 }
 
-.feature-card h3 {
+.nav-right .btn-register {
+    font-weight: bold;
     color: var(--cor-primaria);
-    margin-top: 0;
+    text-decoration: none;
+}
+
+.nav-right .nav-user-info span {
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+}
+
+.btn-logout {
+    background: none;
+    border: 1px solid var(--cor-bordas);
+    color: var(--cor-texto-secundario);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.btn-logout:hover {
+    background-color: var(--cor-fundo);
+    color: var(--cor-primaria);
+    border-color: var(--cor-primaria);
+}
+
+.auth-page-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    margin-top: -82px;
+}
+
+.auth-branding-section {
+    width: 50%;
+    background: var(--gradiente-primario);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    text-align: center;
+}
+
+.auth-branding-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
     margin-bottom: 1rem;
 }
 
-.feature-card p {
-    color: var(--cor-texto-secundario);
+.auth-branding-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
     line-height: 1.6;
 }
 
-.auth-page {
-    display: flex;
-    justify-content: center;
-    padding-top: 2rem;
-}
-
-.auth-form-container {
-    width: 100%;
-    max-width: 420px;
-    padding: 2.5rem;
+.auth-form-section {
+    width: 50%;
     background-color: var(--cor-superficie);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
-.auth-form-container h2 {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 2rem;
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-container h2 {
+    font-size: 2.5rem;
+    color: var(--cor-texto-principal);
+    margin-bottom: 0.5rem;
+}
+
+.auth-container p {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2.5rem;
 }
 
 .form-group {
@@ -174,14 +197,15 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: var(--cor-texto-secundario);
 }
 
 .form-group input {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 12px 15px;
     border: 1px solid var(--cor-bordas);
     border-radius: 8px;
-    box-sizing: border-box;
+    font-size: 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -191,131 +215,109 @@ body {
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
 
-.form-button {
+.auth-button {
     width: 100%;
-    padding: 0.9rem;
+    padding: 15px;
     border: none;
     border-radius: 8px;
     background-color: var(--cor-primaria);
     color: white;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
-.form-button:hover {
+.auth-button:hover {
     background-color: var(--cor-primaria-escura);
 }
 
-.auth-switch-text {
+.auth-switch {
     text-align: center;
     margin-top: 1.5rem;
 }
 
-.auth-switch-text a {
+.auth-switch a {
     color: var(--cor-primaria);
-    text-decoration: none;
     font-weight: 600;
+    text-decoration: none;
 }
 
-.auth-switch-text a:hover {
+.auth-switch a:hover {
     text-decoration: underline;
 }
 
-.calorie-summary {
-    background-color: var(--cor-superficie);
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.meals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-.meal-card {
-    background-color: var(--cor-superficie);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.meal-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--cor-bordas);
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.food-list-item {
-    padding: 10px 0;
-    border-bottom: 1px solid #f5f5f5;
-}
-
-.food-item-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.food-item-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.details-button {
-    background: none;
-    border: 1px solid var(--cor-bordas);
-    cursor: pointer;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.food-item-details {
-    background-color: #fafafa;
+.error-message {
+    color: var(--cor-erro);
+    background-color: var(--cor-erro-fundo);
+    border: 1px solid var(--cor-erro);
     padding: 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-    font-size: 0.9em;
-}
-
-.empty-list-text {
-    color: var(--cor-texto-secundario);
-    font-style: italic;
+    border-radius: 8px;
+    margin-bottom: 1rem;
     text-align: center;
-    padding: 20px 0;
 }
 
-.dashboard-page {
+.dashboard-page, .summary-page, .diario-page, .add-food-page {
     max-width: 900px;
     margin: 0 auto;
 }
 
 .dashboard-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--cor-bordas);
 }
 
 .dashboard-header h1 {
-    margin: 0;
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    color: var(--cor-texto-principal);
 }
 
 .dashboard-header p {
-    color: var(--cor-texto-secundario);
     font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    margin: 0;
+}
+
+.calorie-summary-card {
+    background: var(--gradiente-primario);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.summary-main h2 {
+    font-size: 3.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.summary-main span {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.summary-macros {
+    display: flex;
+    gap: 25px;
+    text-align: center;
+}
+
+.macro-label {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.macro-value {
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 .meals-grid {
@@ -324,54 +326,120 @@ body {
     gap: 20px;
 }
 
-.calorie-summary-card {
-    background: linear-gradient(135deg, var(--cor-primaria), #2E8B57);
-    color: white;
-    padding: 20px;
+.meal-card {
+    background: var(--cor-superficie);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
 }
-.summary-main h2 {
-    font-size: 3rem;
+
+.meal-card-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.meal-card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.meal-card-header span {
+    font-weight: bold;
+    color: var(--cor-primaria);
+}
+
+.food-list {
+    list-style: none;
+    padding: 0 20px;
     margin: 0;
 }
-.summary-main span {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-.summary-macros {
+
+.food-list-item-summary {
     display: flex;
-    gap: 20px;
-    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--cor-bordas);
 }
-.macro-label {
-    display: block;
+
+.food-list-item-summary:last-child {
+    border-bottom: none;
+}
+
+.food-info-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.food-time {
     font-size: 0.9rem;
-    opacity: 0.8;
+    color: var(--cor-texto-secundario);
+    background-color: var(--cor-fundo);
+    padding: 2px 6px;
+    border-radius: 4px;
 }
-.macro-value {
-    font-size: 1.2rem;
+
+.food-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.delete-food-btn {
+    background-color: transparent;
+    border: none;
+    color: #ff4d4d;
+    font-size: 1.8rem;
     font-weight: bold;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+    transition: color 0.2s;
 }
 
-.add-food-page {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+.delete-food-btn:hover {
+    color: #cc0000;
 }
 
-.page-header {
+.add-food-button {
+    display: block;
+    padding: 12px 20px;
+    margin: 20px;
+    border-radius: 8px;
+    background-color: var(--cor-fundo);
+    border: 2px dashed var(--cor-primaria);
+    color: var(--cor-primaria);
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.add-food-button:hover {
+    background-color: #e8f5e9;
+    color: var(--cor-primaria-escura);
+    border-style: solid;
+}
+
+.empty-list-text, .empty-message {
+    padding: 15px 0;
+    text-align: center;
+    color: var(--cor-texto-secundario);
+}
+
+.add-food-page .page-header {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
 }
 
-.back-button {
+.add-food-page .back-button {
     background: var(--cor-superficie);
     border: 1px solid var(--cor-bordas);
     border-radius: 50%;
@@ -385,43 +453,62 @@ body {
     transition: background-color 0.2s;
 }
 
-.back-button:hover {
+.add-food-page .back-button:hover {
     background-color: var(--cor-fundo);
 }
 
-.search-input {
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    border: 1px solid var(--cor-bordas);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+.add-food-page .search-input {
+    box-shadow: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.search-results {
+.add-food-page .search-input:focus {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.add-food-page .search-results {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.food-list-item {
+.add-food-page .food-list-item {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 15px;
     padding: 15px;
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-bordas);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.food-details {
+.add-food-page .food-list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.add-food-page .food-info {
+    flex-grow: 1;
+}
+
+.add-food-page .food-name {
+    font-weight: bold;
+}
+
+.add-food-page .food-details {
     font-size: 0.9rem;
     color: var(--cor-texto-secundario);
 }
 
-.add-button {
+.add-food-page .food-macros {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.add-food-page .add-button {
     background-color: var(--cor-primaria);
     color: white;
     border: none;
@@ -431,153 +518,261 @@ body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    flex-shrink: 0;
     transition: background-color 0.2s;
-}
-
-.add-button:hover {
-    background-color: var(--cor-primaria-escura);
-}
-
-.loading-message, .error-message {
-    text-align: center;
-    padding: 20px;
-    color: var(--cor-texto-secundario);
-}
-
-.error-message {
-    color: #dc3545;
-    font-weight: bold;
-}
-
-main {
-  padding: 20px 0; /* Remove padding lateral do main para alinhar com o container */
-}
-
-/* --- ESTILOS REFINADOS PARA O DASHBOARD --- */
-
-.dashboard-header {
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--cor-bordas);
-}
-
-.dashboard-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  color: var(--cor-texto-principal);
-}
-
-.dashboard-header p {
-  font-size: 1.1rem;
-  color: var(--cor-texto-secundario);
-}
-
-/* Card de Resumo de Calorias */
-.calorie-summary-card {
-  background: linear-gradient(135deg, var(--cor-primaria), #388E3C); /* Usando sua cor primária em um gradiente */
-  color: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.summary-main h2 {
-  font-size: 3.5rem;
-  margin: 0;
-  font-weight: 700;
-}
-.summary-main span {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-.summary-macros {
-  display: flex;
-  gap: 25px;
-  text-align: center;
-}
-.macro-label {
-  display: block;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-.macro-value {
-  font-size: 1.3rem;
-  font-weight: bold;
-}
-
-/* Card de Refeição */
-.meal-card .food-list-item span:first-child {
-    flex-grow: 1; /* Garante que o nome do item empurre as calorias para a direita */
-}
-
-.add-food-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    background-color: var(--cor-fundo);
-    border: 2px dashed var(--cor-primaria);
-    color: var(--cor-primaria);
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-}
-
-.add-food-button:hover {
-    background-color: #e8f5e9; /* Um verde bem clarinho */
-    color: var(--cor-primaria-escura);
-    border-style: solid;
-}
-
-
-/* --- ESTILOS REFINADOS PARA ADD FOOD PAGE --- */
-
-.add-food-page .search-input {
-  box-shadow: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.add-food-page .search-input:focus {
-  border-color: var(--cor-primaria);
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
-}
-
-.add-food-page .food-list-item {
-    background-color: var(--cor-superficie);
-    border: 1px solid var(--cor-bordas);
-    box-shadow: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.add-food-page .food-list-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-}
-
-.add-food-page .add-button {
-    background-color: var(--cor-primaria);
 }
 
 .add-food-page .add-button:hover {
     background-color: var(--cor-primaria-escura);
 }
 
-.food-list-item {
-    gap: 15px; /* Adiciona um espaço entre os elementos */
+.container-apresentacao {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
 }
 
-.food-info {
-    flex-grow: 1; /* Faz a informação do nome ocupar o máximo de espaço possível */
+.header-apresentacao {
+    background-color: #e8f5e9;
+    padding: 4rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
-.food-macros {
-    text-align: right;
-    white-space: nowrap; /* Impede que o texto quebre em duas linhas */
+.header-apresentacao h1 {
+    font-size: 3rem;
+    color: var(--cor-primaria-escura);
+    margin: 0 0 1rem 0;
+}
+
+.header-apresentacao p {
+    font-size: 1.25rem;
+    color: var(--cor-texto-secundario);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 12px 32px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+}
+
+.btn-primario {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.btn-primario:hover {
+    background-color: var(--cor-primaria-escura);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-secundario {
+    background-color: transparent;
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+.btn-secundario:hover {
+    background-color: var(--cor-primaria);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+.feature {
+    background-color: var(--cor-superficie);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+    text-align: center;
+}
+
+.feature:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    border-color: var(--cor-primaria);
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem auto;
+    color: var(--cor-primaria);
+    background-color: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.feature h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--cor-primaria-escura);
+}
+
+.feature p {
+    color: var(--cor-texto-secundario);
+    line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature:nth-child(1) { animation-delay: 0.1s; }
+.feature:nth-child(2) { animation-delay: 0.2s; }
+.feature:nth-child(3) { animation-delay: 0.3s; }
+.feature:nth-child(4) { animation-delay: 0.4s; }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Define a estrutura básica para o layout flexível que empurra o rodapé para baixo */
+body, #root, .app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* O container principal ocupa o espaço vertical restante */
+.app-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* O 'main' ocupa o espaço entre a navbar e o rodapé */
+main {
+    flex-grow: 1;
+}
+
+/* Adiciona um "preenchimento" no topo ao rolar, para a navbar não cobrir o título da seção */
+section[id] {
+  scroll-margin-top: 100px; 
+}
+
+/* --- Seção Sobre (com hover e transição corretos) --- */
+.about-section {
+    padding: 2.5rem 2rem;
+    margin-top: 4rem;
+    background-color: var(--cor-superficie);
+    border-radius: 16px;
+    border: 1px solid var(--cor-bordas);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-section:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    border-color: var(--cor-primaria);
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    color: var(--cor-primaria-escura);
+    margin-bottom: 1.5rem;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--cor-texto-secundario);
+}
+
+/* --- Rodapé (com largura corrigida) --- */
+.footer {
+    width: 100%;
+    padding: 3rem 2rem;
+    margin-top: auto; /* Empurra o rodapé para o fim da página */
+    background-color: var(--cor-primaria-escura);
+    color: white;
+    text-align: center;
+    line-height: 1.6;
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+}
+
+.footer p {
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+.footer a {
+    color: white;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: opacity 0.2s;
+    display: block; /* Faz o link quebrar para a linha de baixo */
+    margin-top: 0.5rem;
+}
+
+.footer a:hover {
+    opacity: 0.8;
+}
+
+/* --- CORREÇÃO DOS ÍCONES E TEXTO DOS CARDS --- */
+
+/* Centraliza o conteúdo dos cards que estava alinhado à esquerda */
+.feature {
+    text-align: center;
+}
+
+/* Controla o tamanho dos SVGs que estavam gigantes */
+.feature-icon svg {
+    width: 48px;
+    height: 48px;
 }

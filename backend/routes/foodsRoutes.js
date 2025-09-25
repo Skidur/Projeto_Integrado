@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
                 app_key: process.env.EDAMAM_APP_KEY,
             }
         });
+        console.log('RESPOSTA CRUA DA EDAMAM:', JSON.stringify(edamamResponse.data, null, 2))
 
         const foodsFromApi = edamamResponse.data.hints.map(item => {
             const food = item.food;

@@ -69,7 +69,7 @@ function RegisterPage() {
             <div className="auth-branding-section">
                 <div className="auth-branding-content">
                     <h1>Junte-se ao Alimetria</h1>
-                    <p>Comece sua jornada para uma vida mais saudável hoje mesmo.</p>
+                    <p>Comece sua jornada para uma vida mais saudável hoje mesmo!</p>
                 </div>
             </div>
             <div className="auth-form-section">

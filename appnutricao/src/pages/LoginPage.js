@@ -51,7 +51,7 @@ function LoginPage() {
             <div className="auth-branding-section">
                 <div className="auth-branding-content">
                     <h1>Bem-vindo de volta!</h1>
-                    <p>Faça login para continuar sua jornada rumo a uma vida mais saudável.</p>
+                    <p>Faça login para continuar sua jornada rumo a uma vida mais saudável!</p>
                 </div>
             </div>
 

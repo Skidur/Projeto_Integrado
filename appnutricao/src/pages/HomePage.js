@@ -8,8 +8,10 @@ function HomePage() {
     if (user) {
         return (
             <div className="welcome-container">
-                <h1>Bem-vindo(a) de volta, {user.email}!</h1>
-                <p>O que você gostaria de fazer agora?</p>
+                <div className="dashboard-header">
+                    <h1>Bem-vindo(a) de volta, {user.name || user.email}!</h1>
+                    <p>O que você gostaria de fazer agora?</p>
+                </div>
                 <div className="nav-card-container">
                     <Link to="/resumo" className="nav-card">
                         <h2>Ver Resumo Diário</h2>

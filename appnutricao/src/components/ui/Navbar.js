@@ -8,24 +8,16 @@ function Navbar() {
 
     const handleScroll = (event, targetId) => {
         event.preventDefault();
-
         if (window.location.pathname !== '/') {
             navigate(`/#${targetId}`);
             return;
         }
-
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
             if (targetId === 'contato') {
-                setTimeout(() => {
-                    targetElement.classList.add('is-highlighted');
-                }, 1000);
-
-                setTimeout(() => {
-                    targetElement.classList.remove('is-highlighted');
-                }, 2200); 
+                setTimeout(() => { targetElement.classList.add('is-highlighted'); }, 1000);
+                setTimeout(() => { targetElement.classList.remove('is-highlighted'); }, 2200); 
             }
         }
     };
@@ -38,11 +30,16 @@ function Navbar() {
         }
     };
 
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
         <header className="navbar-container">
             <nav className="navbar">
                 <Link
-                    to={user ? "/resumo" : "/"}
+                    to={user ? "/" : "/"}
                     className="logo"
                     onClick={handleLogoClick}
                 >
@@ -60,13 +57,15 @@ function Navbar() {
                 <div className="nav-right">
                     {user ? (
                         <div className="nav-user-info">
-                            <span>Olá, {user.email.split('@')[0]}</span>
-                            <button onClick={logout} className="btn btn-logout">Sair</button>
+                            <span className="user-greeting">
+                                Olá, <strong className="user-name">{user.name || user.email.split('@')[0]}</strong>
+                            </span>
+                            <button onClick={handleLogout} className="btn-logout">Sair</button>
                         </div>
                     ) : (
                         <div className="nav-actions">
-                            <Link to="/login" className="btn btn-login">Login</Link>
-                            <Link to="/register" className="btn btn-register">Cadastre-se</Link>
+                            <Link to="/login" className="btn-login">Login</Link>
+                            <Link to="/register" className="btn-register">Cadastre-se</Link>
                         </div>
                     )}
                 </div>

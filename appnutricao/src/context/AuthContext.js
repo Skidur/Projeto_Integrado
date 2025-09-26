@@ -9,8 +9,13 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            const decodedUser = jwtDecode(token);
-            setUser(decodedUser);
+            try {
+                const decodedUser = jwtDecode(token);
+                setUser(decodedUser);
+            } catch (error) {
+                console.error("Token inválido:", error);
+                localStorage.removeItem('authToken');
+            }
         }
     }, []);
 
@@ -25,8 +30,26 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
+    const register = async (nome, email, senha) => {
+        const response = await fetch('http://localhost:3001/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nome, email, senha }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Falha ao cadastrar.');
+        }
+
+        return data;
+    };
+
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, register }}>
             {children}
         </AuthContext.Provider>
     );

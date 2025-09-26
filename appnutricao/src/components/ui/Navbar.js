@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 function Navbar() {
@@ -7,30 +7,53 @@ function Navbar() {
     const navigate = useNavigate();
 
     const handleScroll = (event, targetId) => {
-        event.preventDefault(); 
+        event.preventDefault();
 
-        if (window.location.pathname === '/') {
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        } else {
+        if (window.location.pathname !== '/') {
             navigate(`/#${targetId}`);
+            return;
+        }
+
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            if (targetId === 'contato') {
+                setTimeout(() => {
+                    targetElement.classList.add('is-highlighted');
+                }, 1000);
+
+                setTimeout(() => {
+                    targetElement.classList.remove('is-highlighted');
+                }, 2200); 
+            }
+        }
+    };
+
+    const handleLogoClick = (event) => {
+        if (window.location.pathname === '/') {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            navigate('/');
         }
     };
 
     return (
         <header className="navbar-container">
             <nav className="navbar">
-                <Link to={user ? "/resumo" : "/"} className="logo">
+                <Link
+                    to={user ? "/resumo" : "/"}
+                    className="logo"
+                    onClick={handleLogoClick}
+                >
                     Alimetria
                 </Link>
 
                 {!user && (
                     <ul className="nav-center">
-                        <li><a href="/#features" onClick={(e) => handleScroll(e, 'features')}>Funcionalidades</a></li>
-                        <li><a href="/#sobre" onClick={(e) => handleScroll(e, 'sobre')}>Sobre</a></li>
-                        <li><a href="/#contato" onClick={(e) => handleScroll(e, 'contato')}>Contato</a></li>
+                        <li><a href="#features" onClick={(e) => handleScroll(e, 'features')}>Funcionalidades</a></li>
+                        <li><a href="#sobre" onClick={(e) => handleScroll(e, 'sobre')}>Sobre</a></li>
+                        <li><a href="#contato" onClick={(e) => handleScroll(e, 'contato')}>Contato</a></li>
                     </ul>
                 )}
 

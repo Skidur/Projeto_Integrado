@@ -4,6 +4,7 @@ import './App.css';
 import './components/ui/styles.css';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/ui/Navbar';
+import Footer from './components/ui/Footer';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/adicionar/:mealType" element={<AddFoodPage />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </AuthProvider>
   );

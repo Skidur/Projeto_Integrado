@@ -15,7 +15,7 @@ function MealLogPage() {
         const hoje = new Date().toISOString().split('T')[0];
 
         try {
-            const response = await fetch(`http://localhost:3001/api/diario/data/${user.id}/${hoje}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/data/${user.id}/${hoje}`);
             const data = await response.json();
             setMeals(data);
         } catch (error) {
@@ -33,7 +33,7 @@ function MealLogPage() {
         if (!window.confirm("Tem certeza que deseja remover este alimento?")) return;
 
         try {
-            const response = await fetch(`http://localhost:3001/api/diario/food/${registroId}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/food/${registroId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

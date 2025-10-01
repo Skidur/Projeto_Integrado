@@ -60,7 +60,7 @@ function SummaryPage() {
         setIsLoading(true);
         const hoje = new Date().toISOString().split('T')[0];
         try {
-            const response = await fetch(`http://localhost:3001/api/diario/data/${user.id}/${hoje}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/data/${user.id}/${hoje}`);
             if (!response.ok) {
                 throw new Error('Falha ao buscar dados.');
             }

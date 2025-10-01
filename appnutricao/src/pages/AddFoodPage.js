@@ -22,7 +22,7 @@ function AddFoodPage() {
 
         const fetchFoods = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/api/foods?search=${searchTerm}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/foods?search=${searchTerm}`);
                 if (!response.ok) {
                     throw new Error('A resposta da rede não foi OK');
                 }
@@ -54,7 +54,7 @@ function AddFoodPage() {
         };
 
         try {
-            const response = await fetch('http://localhost:3001/api/diario/add', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(registro)

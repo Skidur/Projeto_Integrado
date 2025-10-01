@@ -18,11 +18,14 @@ function AddFoodPage() {
             setResults([]);
             return;
         }
+
         setIsLoading(true);
         setError(null);
+
         const fetchFoods = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/foods/search?q=${searchTerm}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/foods?q=${searchTerm}`);
+                
                 if (!response.ok) {
                     throw new Error('A resposta da rede não foi OK');
                 }
@@ -35,9 +38,11 @@ function AddFoodPage() {
                 setIsLoading(false);
             }
         };
+
         const delayDebounceFn = setTimeout(() => {
             fetchFoods();
         }, 500);
+
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
@@ -77,7 +82,7 @@ function AddFoodPage() {
             alert(`Erro: ${error.message}`);
         }
     };
-
+    
     const getTitle = (type) => {
         const titles = {
             cafeDaManha: 'Café da Manhã',

@@ -58,7 +58,7 @@ function Navbar() {
                     {user ? (
                         <div className="nav-user-info">
                             <span className="user-greeting">
-                                Olá, <strong className="user-name">{user.name || user.email.split('@')[0]}</strong>
+                                Olá, <strong className="user-name">{user.nome || user.email.split('@')[0]}</strong>
                             </span>
                             <button onClick={handleLogout} className="btn-logout">Sair</button>
                         </div>

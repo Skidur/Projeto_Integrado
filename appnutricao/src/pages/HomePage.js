@@ -9,7 +9,7 @@ function HomePage() {
         return (
             <div className="welcome-container">
                 <div className="dashboard-header">
-                    <h1>Bem-vindo(a) de volta, {user.name || user.email}!</h1>
+                    <h1>Bem-vindo(a) de volta, {user.nome || user.email}!</h1>
                     <p>O que você gostaria de fazer agora?</p>
                 </div>
                 <div className="nav-card-container">

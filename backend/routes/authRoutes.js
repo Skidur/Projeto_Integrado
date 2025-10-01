@@ -7,18 +7,18 @@ const router = express.Router();
 const JWT_SECRET = 'seu_segredo_super_secreto_e_longo'; 
 
 router.post('/register', async (req, res) => {
-    const { email, senha } = req.body;
+    const { nome, email, senha } = req.body;
 
-    if (!email || !senha) {
-        return res.status(400).json({ message: 'Email e senha são obrigatórios.' });
+    if (!nome || !email || !senha) {
+        return res.status(400).json({ message: 'Nome, email e senha são obrigatórios.' });
     }
 
     try {
         const salt = await bcrypt.genSalt(10);
         const senhaHash = await bcrypt.hash(senha, salt);
 
-        const queryText = 'INSERT INTO usuarios(email, senha) VALUES($1, $2) RETURNING id, email';
-        const values = [email, senhaHash];
+        const queryText = 'INSERT INTO usuarios(nome, email, senha) VALUES($1, $2, $3) RETURNING id, nome, email';
+        const values = [nome, email, senhaHash];
 
         const result = await db.query(queryText, values);
 
@@ -53,7 +53,6 @@ router.post('/login', async (req, res) => {
         }
 
         const usuario = rows[0];
-
         const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
         if (!senhaCorreta) {
@@ -62,6 +61,7 @@ router.post('/login', async (req, res) => {
 
         const payload = {
             id: usuario.id,
+            nome: usuario.nome,
             email: usuario.email,
         };
 
@@ -76,6 +76,7 @@ router.post('/login', async (req, res) => {
             token: token,
             user: {
                 id: usuario.id,
+                nome: usuario.nome,
                 email: usuario.email
             }
         });

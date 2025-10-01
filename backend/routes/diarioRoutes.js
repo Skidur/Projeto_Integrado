@@ -3,9 +3,8 @@ const db = require('../db');
 const router = express.Router();
 
 router.post('/add', async (req, res) => {
-    const { usuario_id, alimento_id, mealType, data, quantidade, horario } = req.body;
-
-    if (!usuario_id || !alimento_id || !mealType || !data) {
+    const { usuario_id, alimento_id, tipo_refeicao, data, quantidade_gramas, horario } = req.body;
+    if (!usuario_id || !alimento_id || !tipo_refeicao || !data) {
         return res.status(400).json({ message: 'Dados insuficientes para registrar o alimento.' });
     }
 
@@ -14,7 +13,7 @@ router.post('/add', async (req, res) => {
 
         let refeicaoResult = await db.query(
             'SELECT id FROM diario_refeicoes WHERE usuario_id = $1 AND data = $2 AND tipo_refeicao = $3',
-            [usuario_id, data, mealType]
+            [usuario_id, data, tipo_refeicao]
         );
 
         let refeicaoId;
@@ -23,16 +22,16 @@ router.post('/add', async (req, res) => {
         } else {
             const newRefeicaoResult = await db.query(
                 'INSERT INTO diario_refeicoes (usuario_id, data, tipo_refeicao) VALUES ($1, $2, $3) RETURNING id',
-                [usuario_id, data, mealType]
+                [usuario_id, data, tipo_refeicao]
             );
             refeicaoId = newRefeicaoResult.rows[0].id;
         }
 
         await db.query(
             'INSERT INTO diario_alimentos (refeicao_id, alimento_id, quantidade_gramas, horario) VALUES ($1, $2, $3, $4)',
-            [refeicaoId, alimento_id, quantidade || 100, horario || null]
+            [refeicaoId, alimento_id, quantidade_gramas || 100, horario || null]
         );
-        
+
         await db.query('COMMIT');
         res.status(201).json({ message: 'Alimento adicionado com sucesso!' });
 
@@ -50,7 +49,7 @@ router.get('/data/:usuario_id/:data', async (req, res) => {
         const query = `
             SELECT 
                 dr.tipo_refeicao,
-                da.registro_id, -- ID único do registro para poder deletar
+                da.registro_id,
                 a.id as alimento_id,
                 a.nome,
                 a.calorias,
@@ -63,7 +62,7 @@ router.get('/data/:usuario_id/:data', async (req, res) => {
             JOIN diario_alimentos da ON dr.id = da.refeicao_id
             JOIN alimentos a ON da.alimento_id = a.id
             WHERE dr.usuario_id = $1 AND dr.data = $2
-            ORDER BY da.horario; -- Ordena pela hora
+            ORDER BY da.horario;
         `;
 
         const { rows } = await db.query(query, [usuario_id, data]);
@@ -96,7 +95,6 @@ router.delete('/food/:registro_id', async (req, res) => {
     const { registro_id } = req.params;
     try {
         const deleteResult = await db.query('DELETE FROM diario_alimentos WHERE registro_id = $1', [registro_id]);
-
         if (deleteResult.rowCount === 0) {
             return res.status(404).json({ message: 'Registro de alimento não encontrado.' });
         }

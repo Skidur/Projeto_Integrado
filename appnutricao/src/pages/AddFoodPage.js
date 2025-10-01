@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from '../context/AuthContext';
 
 function AddFoodPage() {
     const { mealType } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const [searchTerm, setSearchTerm] = useState('');
     const [results, setResults] = useState([]);
@@ -16,13 +18,11 @@ function AddFoodPage() {
             setResults([]);
             return;
         }
-
         setIsLoading(true);
         setError(null);
-
         const fetchFoods = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/foods?search=${searchTerm}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/foods/search?q=${searchTerm}`);
                 if (!response.ok) {
                     throw new Error('A resposta da rede não foi OK');
                 }
@@ -35,21 +35,25 @@ function AddFoodPage() {
                 setIsLoading(false);
             }
         };
-
         const delayDebounceFn = setTimeout(() => {
             fetchFoods();
         }, 500);
-
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
 
     const handleAddFood = async (food) => {
+        if (!user) {
+            alert("Você precisa estar logado para adicionar alimentos.");
+            navigate('/login');
+            return;
+        }
+
         const registro = {
-            usuario_id: 1,
+            usuario_id: user.id,
             alimento_id: food.id,
-            mealType: mealType,
+            tipo_refeicao: mealType,
             data: new Date().toISOString().split('T')[0],
-            quantidade: 100,
+            quantidade_gramas: food.porcao_padrao_gramas || 100,
             horario: horario
         };
 
@@ -66,7 +70,7 @@ function AddFoodPage() {
             }
 
             console.log('Alimento adicionado com sucesso!');
-            navigate('/dashboard');
+            navigate('/diario');
 
         } catch (error) {
             console.error('Erro ao salvar alimento:', error);

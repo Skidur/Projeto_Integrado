@@ -735,13 +735,16 @@ section[id] {
     gap: 20px;
 }
 
+/* 🟢 ALTERAÇÃO 1: PADRÃO VISUAL DO MEAL CARD (Fundo Branco + Sombra) */
 .meal-card {
-    background: var(--cor-superficie);
+    /* Padrão de CARD LIMPO */
+    background: var(--cor-superficie); 
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
     overflow: hidden;
 }
 
+/* 🟢 ALTERAÇÃO 2: CABEÇALHO DO MEAL CARD */
 .meal-card-header {
     padding: 15px 20px;
     display: flex;
@@ -752,12 +755,14 @@ section[id] {
 
 .meal-card-header h3 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Título ligeiramente maior e mais visível (Ajuste de Consistência) */
+    color: var(--cor-texto-principal); 
 }
 
 .meal-card-header span {
     font-weight: bold;
-    color: var(--cor-primaria);
+    color: var(--cor-primaria); /* Destaque primário */
+    font-size: 1.1rem;
 }
 
 .food-list {
@@ -766,12 +771,15 @@ section[id] {
     margin: 0;
 }
 
+/* 🟢 ALTERAÇÃO 3: ESTILOS DOS ITENS DE LISTA DE RESUMO */
 .food-list-item-summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid var(--cor-bordas);
+    font-size: 1rem; /* Padronização de tamanho de texto */
+    color: var(--cor-texto-principal);
 }
 
 .food-list-item-summary:last-child {
@@ -798,10 +806,17 @@ section[id] {
     gap: 15px;
 }
 
+.food-calories-summary {
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    margin-right: 15px;
+    font-size: 1rem;
+}
+
 .delete-food-btn {
     background-color: transparent;
     border: none;
-    color: #ff4d4d;
+    color: var(--cor-erro); /* Usa a variável de cor de erro */
     font-size: 1.8rem;
     font-weight: bold;
     cursor: pointer;
@@ -811,7 +826,7 @@ section[id] {
 }
 
 .delete-food-btn:hover {
-    color: #cc0000;
+    color: var(--cor-erro-fundo); /* Usa a variável de fundo de erro para o hover */
 }
 
 .add-food-button {

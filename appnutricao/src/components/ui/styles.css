@@ -871,6 +871,14 @@ section[id] {
     color: var(--cor-erro);
 }
 
+.add-food-page {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--cor-superficie); 
+}
+
 .add-food-button {
     display: block;
     padding: 12px 20px;
@@ -910,9 +918,11 @@ section[id] {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding-bottom: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--cor-bordas);
+    background-color: #e8f5e9;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem; 
+    border-radius: 12px;
+    /* border-bottom: none; */ /* Remover a borda inferior se não quiser */
 }
 
 .add-food-page header.page-header h1 {

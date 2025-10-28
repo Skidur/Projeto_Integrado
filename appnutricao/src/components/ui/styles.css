@@ -684,7 +684,7 @@ section[id] {
 }
 
 /* --- Estilos do Dashboard (Logado) --- */
-.dashboard-page, .summary-page, .diario-page, .add-food-page {
+.dashboard-page, .summary-page, .diario-page {
     max-width: 900px;
     margin: 0 auto;
     background-color: var(--cor-primaria);
@@ -874,9 +874,7 @@ section[id] {
 .add-food-page {
     max-width: 900px;
     margin: 2rem auto;
-    padding: 2rem;
-    border-radius: 8px;
-    background-color: var(--cor-superficie); 
+    padding: 2rem; 
 }
 
 .add-food-button {
@@ -918,10 +916,11 @@ section[id] {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem 2rem;
-    margin-bottom: 2rem; 
+    background-color: #e8f5e9;
+    padding: 1.5rem 2rem; 
+    margin-bottom: 2rem;
     border-radius: 12px;
-    /* border-bottom: none; */ /* Remover a borda inferior se não quiser */
+    /* border-bottom: none; */ /* Opcional: remove linha inferior */
 }
 
 .add-food-page header.page-header h1 {

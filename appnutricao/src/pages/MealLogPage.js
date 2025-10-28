@@ -51,7 +51,7 @@ function MealLogPage() {
 
     return (
         <div className="summary-page">
-            <header className="summary-header">
+            <header className="dashboard-header">
                 <h1>Diário</h1>
                 <p>{dataFormatada}</p>
                 <input
@@ -60,7 +60,12 @@ function MealLogPage() {
                     onChange={(e) => setSelectedDate(e.target.value)}
                     className="date-picker-diario"
                 />
-                <button onClick={() => navigate(-1)} className="btn-voltar">Voltar</button>
+                <button onClick={() => navigate(-1)} className="btn-voltar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                    Voltar
+                </button>
             </header>
 
             {isLoading ? <p>Carregando seu diário...</p> : (

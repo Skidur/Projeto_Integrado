@@ -779,7 +779,7 @@ section[id] {
 
 .food-list {
     list-style: none;
-    padding: 0 20px;
+    padding: 0;
     margin: 0;
 }
 
@@ -787,10 +787,15 @@ section[id] {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--cor-bordas);
     font-size: 1rem; 
     color: var(--cor-texto-principal);
+    transition: background-color 0.2s ease;
+}
+
+.food-list-item-summary:hover {
+    background-color: #f9f9f9;
 }
 
 .food-list-item-summary:last-child {
@@ -801,6 +806,11 @@ section[id] {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+/* Estilo para o nome do alimento (se precisar de mais destaque) */
+.food-info-summary span:first-child {
+    font-weight: 500;
 }
 
 .food-time {
@@ -818,26 +828,28 @@ section[id] {
 }
 
 .food-calories-summary {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--cor-texto-secundario);
-    margin-right: 15px;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    min-width: 60px;
+    text-align: right;
 }
 
 .delete-food-btn {
     background-color: transparent;
     border: none;
-    color: var(--cor-erro); /* Usa a variável de cor de erro */
-    font-size: 1.8rem;
+    color: #aaa;
+    font-size: 1.2rem; 
     font-weight: bold;
     cursor: pointer;
-    padding: 0 5px;
+    padding: 0;
     line-height: 1;
     transition: color 0.2s;
+    margin-left: 5px;
 }
 
 .delete-food-btn:hover {
-    color: var(--cor-erro-fundo); /* Usa a variável de fundo de erro para o hover */
+    color: var(--cor-erro);
 }
 
 .add-food-button {

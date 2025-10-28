@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Corrigido
 import MealCard from '../components/features/MealCard';
 import { useAuth } from '../context/AuthContext';
 
 function MealLogPage() {
     const [meals, setMeals] = useState({ cafeDaManha: [], almoco: [], janta: [], lanches: [] });
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     const fetchDailyLog = useCallback(async () => {
         if (!user) return;
-
         setIsLoading(true);
-        const hoje = new Date().toISOString().split('T')[0];
-
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/data/${user.id}/${hoje}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/data/${user.id}/${selectedDate}`); 
             const data = await response.json();
             setMeals(data);
         } catch (error) {
             console.error('Erro ao buscar o diário:', error);
+            setMeals({ cafeDaManha: [], almoco: [], janta: [], lanches: [] });
         } finally {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [user, selectedDate]);
 
     useEffect(() => {
         fetchDailyLog();
@@ -31,7 +31,6 @@ function MealLogPage() {
 
     const handleDeleteFood = async (registroId) => {
         if (!window.confirm("Tem certeza que deseja remover este alimento?")) return;
-
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/food/${registroId}`, {
                 method: 'DELETE',
@@ -46,15 +45,22 @@ function MealLogPage() {
         }
     };
 
-    const hoje = new Date();
+    const displayDate = new Date(selectedDate + 'T00:00:00');
     const opcoesFormatacao = { weekday: 'long', day: 'numeric', month: 'long' };
-    const dataFormatada = new Intl.DateTimeFormat('pt-BR', opcoesFormatacao).format(hoje);
+    const dataFormatada = new Intl.DateTimeFormat('pt-BR', opcoesFormatacao).format(displayDate);
 
     return (
-        <div className="diario-page">
-            <header className="dashboard-header">
-                <h1>Diário de Hoje</h1>
+        <div className="summary-page">
+            <header className="summary-header">
+                <h1>Diário</h1>
                 <p>{dataFormatada}</p>
+                <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="date-picker-diario"
+                />
+                <button onClick={() => navigate(-1)} className="btn-voltar">Voltar</button>
             </header>
 
             {isLoading ? <p>Carregando seu diário...</p> : (

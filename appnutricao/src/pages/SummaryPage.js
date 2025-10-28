@@ -53,33 +53,29 @@ function SummaryPage() {
     const [summary, setSummary] = useState({ totalCalorias: 0, totalProteinas: 0, totalCarboidratos: 0, totalGorduras: 0, mealSummaries: [] });
     const [isLoading, setIsLoading] = useState(true);
     const [selectedMeal, setSelectedMeal] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const { user } = useAuth();
 
     const fetchSummary = useCallback(async () => {
         if (!user) return;
         setIsLoading(true);
-        const hoje = new Date().toISOString().split('T')[0];
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/data/${user.id}/${hoje}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/diario/summary/${user.id}/${selectedDate}`);
             if (!response.ok) {
-                throw new Error('Falha ao buscar dados.');
+                console.error('Falha ao buscar resumo:', response.statusText);
+                    setSummary({ totalCalorias: 0, totalProteinas: 0, totalCarboidratos: 0, totalGorduras: 0, mealSummaries: [] });
+                    setIsLoading(false);
+                    return;
             }
             const data = await response.json();
+
             const allFoods = Object.values(data).flat();
-
-            const mealKeyMapping = {
-                cafeDaManha: 'Café da Manhã',
-                almoco: 'Almoço',
-                janta: 'Janta',
-                lanches: 'Lanches'
-            };
-
+            const mealKeyMapping = {};
             const mealSummaries = Object.keys(mealKeyMapping).map(key => ({
                 title: mealKeyMapping[key],
                 foods: data[key] || [],
                 calories: (data[key] || []).reduce((acc, food) => acc + (Number(food.calorias) || 0), 0)
             }));
-            
             setSummary({
                 totalCalorias: allFoods.reduce((acc, food) => acc + (Number(food.calorias) || 0), 0),
                 totalProteinas: allFoods.reduce((acc, food) => acc + (Number(food.proteinas) || 0), 0),
@@ -87,20 +83,28 @@ function SummaryPage() {
                 totalGorduras: allFoods.reduce((acc, food) => acc + (Number(food.gorduras) || 0), 0),
                 mealSummaries
             });
+
         } catch (error) {
             console.error('Erro ao buscar o resumo diário:', error);
             setSummary({ totalCalorias: 0, totalProteinas: 0, totalCarboidratos: 0, totalGorduras: 0, mealSummaries: [] });
         } finally {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [user, selectedDate]); 
 
     useEffect(() => {
         fetchSummary();
     }, [fetchSummary]);
 
-    if (isLoading) { }
-    if (summary.totalCalorias === 0) { }
+    const displayDate = new Date(selectedDate + 'T00:00:00');
+    const opcoesFormatacao = { day: 'numeric', month: 'long', year: 'numeric' };
+    const dataFormatada = new Intl.DateTimeFormat('pt-BR', opcoesFormatacao).format(displayDate);
+
+    if (isLoading) {
+        return <div className="loading-container"><p>Carregando resumo...</p></div>;
+    }
+    if (!isLoading && summary.totalCalorias === 0 && summary.mealSummaries.length === 0) {
+    }
 
     console.log("Dados do Resumo:", summary);
 
@@ -113,10 +117,16 @@ function SummaryPage() {
                 </Link>
             </div>
 
-            <div className="dashboard-header">
-                <h1>Resumo Nutricional</h1>
-                <p>Seu resumo de consumo para hoje.</p>
-            </div>
+            <header className="summary-header">
+                <h1>Resumo - {dataFormatada}</h1>
+                <input
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="date-picker-summary"
+                />
+                <Link to="/diario" className="btn-secondary">Ver Diário Detalhado</Link>
+            </header>
 
             <div className="calorie-summary-card">
                 <div className="summary-main">

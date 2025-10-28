@@ -1232,7 +1232,13 @@ section[id] {
     background-color: var(--cor-superficie);
     margin-left: auto;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
+
+.date-picker-diario:hover {
+    border-color: #ccc;
+}
+
 .date-picker-diario:focus {
     outline: none;
     border-color: var(--cor-primaria);

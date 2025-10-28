@@ -52,7 +52,7 @@ function MealLogPage() {
     return (
         <div className="summary-page">
             <header className="dashboard-header">
-                <h1>Diário</h1>
+                <h1>Diário Alimentar</h1>
                 <p>{dataFormatada}</p>
                 <input
                     type="date"

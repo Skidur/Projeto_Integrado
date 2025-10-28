@@ -687,7 +687,6 @@ section[id] {
 .dashboard-page, .summary-page, .diario-page {
     max-width: 900px;
     margin: 0 auto;
-    background-color: var(--cor-primaria);
 }
 
 .dashboard-header {

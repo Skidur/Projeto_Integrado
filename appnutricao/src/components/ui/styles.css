@@ -284,11 +284,29 @@ section[id] {
     margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.form-group label[for="horario"] {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
     color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+}
+
+.add-food-page .time-input {
+    padding: 8px 10px;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;
+    font-size: 1rem;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-superficie);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.add-food-page .time-input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 .input-wrapper {
@@ -669,6 +687,7 @@ section[id] {
 .dashboard-page, .summary-page, .diario-page, .add-food-page {
     max-width: 900px;
     margin: 0 auto;
+    background-color: var(--cor-primaria);
 }
 
 .dashboard-header {
@@ -887,30 +906,64 @@ section[id] {
     margin-bottom: 20px;
 }
 
+.add-food-page header.page-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cor-bordas);
+}
+
+.add-food-page header.page-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--cor-texto-principal);
+}
+
 .add-food-page .back-button {
-    background: var(--cor-superficie);
-    border: 1px solid var(--cor-bordas);
+    background: var(--cor-primaria);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0;
+    flex-shrink: 0;
 }
 
 .add-food-page .back-button:hover {
-    background-color: var(--cor-fundo);
+    background-color: var(--cor-primaria-escura);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.add-food-page .back-button svg {
+    width: 1em;
+    height: 1em;
+}
+
+.search-container {
+    margin-bottom: 1.5rem;
 }
 
 .add-food-page .search-input {
-    box-shadow: none;
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 8px;
+    font-size: 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
 }
 
 .add-food-page .search-input:focus {
+    outline: none;
     border-color: var(--cor-primaria);
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
 }
@@ -930,12 +983,14 @@ section[id] {
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-bordas);
     border-radius: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: border-color 0.3s ease, transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
 }
 
 .add-food-page .food-list-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    border-color: var(--cor-primaria);
 }
 
 .add-food-page .food-info {
@@ -973,6 +1028,8 @@ section[id] {
 .add-food-page .add-button:hover {
     background-color: var(--cor-primaria-escura);
 }
+
+
 
 .welcome-container {
     max-width: 900px;
@@ -1274,4 +1331,34 @@ section[id] {
 }
 .btn-voltar:hover {
     background-color: var(--cor-primaria-escura);
+}
+
+.time-input-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.time-input-container label {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+}
+
+.time-input-addfood {
+    padding: 6px 8px;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-superficie);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.time-input-addfood:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }

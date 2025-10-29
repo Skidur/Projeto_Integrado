@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 
 function AddFoodPage() {
-    const { mealType } = useParams();
+    const { mealType, date } = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
 
@@ -57,7 +57,7 @@ function AddFoodPage() {
             usuario_id: user.id,
             alimento_id: food.id,
             tipo_refeicao: mealType,
-            data: new Date().toISOString().split('T')[0],
+            data: date,
             quantidade_gramas: food.porcao_padrao_gramas || 100,
             horario: horario
         };

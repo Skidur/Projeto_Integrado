@@ -24,7 +24,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/resumo" element={<SummaryPage />} />
             <Route path="/diario" element={<MealLogPage />} />
-            <Route path="/adicionar/:mealType" element={<AddFoodPage />} />
+            <Route path="/adicionar/:mealType/:date" element={<AddFoodPage />} />
           </Routes>
         </main>
         <Footer />

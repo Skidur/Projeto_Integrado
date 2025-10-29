@@ -60,7 +60,7 @@ function MealLogPage() {
                     onChange={(e) => setSelectedDate(e.target.value)}
                     className="date-picker-diario"
                 />
-                <button onClick={() => navigate(-1)} className="btn-voltar">
+                <button onClick={() => navigate('/dashboard')} className="btn-voltar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
@@ -70,10 +70,10 @@ function MealLogPage() {
 
             {isLoading ? <p>Carregando seu diário...</p> : (
                 <div className="meals-grid">
-                    <MealCard title="Café da Manhã" foods={meals.cafeDaManha} mealType="cafeDaManha" onDeleteFood={handleDeleteFood} />
-                    <MealCard title="Almoço" foods={meals.almoco} mealType="almoco" onDeleteFood={handleDeleteFood} />
-                    <MealCard title="Jantar" foods={meals.janta} mealType="janta" onDeleteFood={handleDeleteFood} />
-                    <MealCard title="Lanches" foods={meals.lanches} mealType="lanches" onDeleteFood={handleDeleteFood} />
+                    <MealCard title="Café da Manhã" foods={meals.cafeDaManha} mealType="cafeDaManha" onDeleteFood={handleDeleteFood} selectedDate={selectedDate} />
+                    <MealCard title="Almoço" foods={meals.almoco} mealType="almoco" onDeleteFood={handleDeleteFood} selectedDate={selectedDate} />
+                    <MealCard title="Jantar" foods={meals.janta} mealType="janta" onDeleteFood={handleDeleteFood} selectedDate={selectedDate} />
+                    <MealCard title="Lanches" foods={meals.lanches} mealType="lanches" onDeleteFood={handleDeleteFood} selectedDate={selectedDate} />
                 </div>
             )}
         </div>

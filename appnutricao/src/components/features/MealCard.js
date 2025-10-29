@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function MealCard({ title, foods, mealType, onDeleteFood }) {
+function MealCard({ title, foods, mealType, onDeleteFood, selectedDate }) {
   const subtotalCalorias = foods.reduce((total, food) => total + food.calorias, 0);
 
   return (
@@ -39,9 +39,7 @@ function MealCard({ title, foods, mealType, onDeleteFood }) {
         )}
       </ul>
 
-      <Link to={`/adicionar/${mealType}`} className="add-food-button">
-        + Adicionar Alimento
-      </Link>
+      <Link to={`/add-food/${mealType}/${selectedDate}`} className="add-food-button">+ Adicionar Alimento</Link>
     </div>
   );
 }

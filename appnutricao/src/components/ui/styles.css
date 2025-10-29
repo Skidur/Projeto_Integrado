@@ -914,45 +914,47 @@ section[id] {
 .add-food-page header.page-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     background-color: #e8f5e9;
     padding: 1.5rem 2rem; 
     margin-bottom: 2rem;
     border-radius: 12px;
-    /* border-bottom: none; */ /* Opcional: remove linha inferior */
 }
 
 .add-food-page header.page-header h1 {
     margin: 0;
     font-size: 1.8rem;
     color: var(--cor-texto-principal);
+    flex-grow: 1;
 }
 
 .add-food-page .back-button {
-    background: var(--cor-primaria);
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    color: white;
+    background: transparent;
+    border-radius: 6px;
+    padding: 0.6rem 1rem;
+    color: var(--cor-primaria);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 0;
-    flex-shrink: 0;
+    gap: 0.5rem;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--cor-primaria);
+    box-shadow: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
 }
 
 .add-food-page .back-button:hover {
-    background-color: var(--cor-primaria-escura);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--cor-primaria-escura);
+    border-color: var(--cor-primaria-escura);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .add-food-page .back-button svg {
-    width: 1em;
-    height: 1em;
+    fill: currentColor;
 }
 
 .search-container {
@@ -1344,7 +1346,7 @@ section[id] {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .time-input-container label {
@@ -1368,4 +1370,56 @@ section[id] {
     outline: none;
     border-color: var(--cor-primaria);
     box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.date-picker-summary {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--cor-bordas);
+    border-radius: 6px;
+    font-size: inherit;
+    line-height: 1.5;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-superficie);
+    margin-left: auto;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    height: calc(0.6rem * 2 + 0.9rem * 1.5);
+    box-sizing: border-box;
+}
+
+.date-picker-summary:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.date-picker-summary:hover {
+    border-color: #ccc;
+}
+
+.summary-header .btn-secondary {
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    background-color: transparent;
+    color: var(--cor-primaria);
+    border: 1px solid var(--cor-primaria);
+    margin-left: 1rem;
+    box-sizing: border-box;
+    height: calc(0.6rem * 2 + 0.9rem * 1.5 + 2px);
+}
+.summary-header .btn-secondary:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--cor-primaria-escura);
+    border-color: var(--cor-primaria-escura);
+}
+
+.add-food-page-top-bar {
+    margin-bottom: 1rem;
 }

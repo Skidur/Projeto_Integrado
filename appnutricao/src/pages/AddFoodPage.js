@@ -95,19 +95,33 @@ function AddFoodPage() {
 
     return (
         <div className="add-food-page">
-            <header className="page-header">
-                <button onClick={() => navigate(-1)} className="back-button" title="Voltar">
+            <div className="add-food-page-top-bar">
+                <button onClick={() => navigate(-1)} className="back-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
+                    <span>Voltar</span>
                 </button>
+            </div>
+
+            <header className="page-header">
                 <h1>Adicionar ao {getTitle(mealType)}</h1>
+                <div className="time-input-container">
+                    <label htmlFor="horario">Horário:</label>
+                    <input
+                        type="time"
+                        id="horario"
+                        className="time-input"
+                        value={horario}
+                        onChange={(e) => setHorario(e.target.value)}
+                    />
+                </div>
             </header>
 
             <div className="search-container">
-                <input 
-                    type="text" 
-                    placeholder="Digite o nome de um alimento..." 
+                <input
+                    type="text"
+                    placeholder="Digite o nome de um alimento..."
                     className="search-input"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -115,21 +129,10 @@ function AddFoodPage() {
                 />
             </div>
 
-            <div className="form-group">
-                <label htmlFor="horario">Horário da Refeição:</label>
-                <input 
-                    type="time" 
-                    id="horario"
-                    className="time-input"
-                    value={horario}
-                    onChange={(e) => setHorario(e.target.value)}
-                />
-            </div>
-
             <div className="search-results">
                 {isLoading && <p className="loading-message">Buscando...</p>}
                 {error && <p className="error-message">{error}</p>}
-                
+
                 {!isLoading && !error && results.map(food => {
                     const nomeArray = food.nome.split(',');
                     const nomePrincipal = nomeArray[0];
@@ -139,7 +142,7 @@ function AddFoodPage() {
                         <div className="food-list-item" key={food.id || food.nome}>
                             <div className="food-info">
                                 <span className="food-name">{nomePrincipal}</span>
-                                {descricao && <span className="food-details">{descricao}</span>} 
+                                {descricao && <span className="food-details">{descricao}</span>}
                             </div>
                             <div className="food-macros">
                                 <span className="food-details">

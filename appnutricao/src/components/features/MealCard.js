@@ -39,7 +39,7 @@ function MealCard({ title, foods, mealType, onDeleteFood, selectedDate }) {
         )}
       </ul>
 
-      <Link to={`/add-food/${mealType}/${selectedDate}`} className="add-food-button">+ Adicionar Alimento</Link>
+      <Link to={`/adicionar/${mealType}/${selectedDate}`} className="add-food-button">+ Adicionar Alimento</Link>
     </div>
   );
 }
